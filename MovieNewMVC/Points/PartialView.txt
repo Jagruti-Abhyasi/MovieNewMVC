@@ -1,0 +1,4 @@
+﻿You can render the partial view in the parent view using the HTML helper methods: 
+@html.Partial(), 
+@html.RenderPartial(), and 
+@html.RenderAction().

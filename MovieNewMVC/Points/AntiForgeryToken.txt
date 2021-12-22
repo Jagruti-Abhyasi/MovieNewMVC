@@ -1,0 +1,33 @@
+﻿CSRF - Cross Site Request Forgery
+-----------------
+
+Anti-Forgery Tokens
+To help prevent CSRF attacks, ASP.NET MVC uses anti-forgery tokens, also called request verification tokens.
+
+1) The client requests an HTML page that contains a form.
+2) The server includes two tokens in the response. One token is sent as a cookie. The other is placed in a hidden form field. The tokens are generated randomly so that an adversary cannot guess the values.
+3) When the client submits the form, it must send both tokens back to the server. 
+	The client sends the cookie token as a cookie, and it sends the form token inside the form data. 
+	(A browser client automatically does this when the user submits the form.)
+4) If a request does not include both tokens, the server disallows the request.
+
+--------------
+To set this
+in our customer html form add helper method
+
+@Html.AntiForgeryToken()
+this method will create a token which is like a secret code and then put it in a hiddent field in this form 
+and also add a cookie in user computers.
+
+--------
+add [ValidateAntiForgeryToken] on save method of controller.
+----
+with this we give a token to the user and when they post a form we were goint to get this two values 
+the hidden field and the encrypted cookie and compare them
+if they matched that means this is a legitimate request otherwise	it's an attack, because if the hacker redirect 
+the user to the malicious page they don't have access to the hidden field in our form because this hidden field
+only exists when the user actually visits our customer form so even if the hacker steals the cookie they still 
+don't have access to the hidden field.
+
+So on the server we do this validation if these two values don't match this is an attack and we immediately 
+stop the request

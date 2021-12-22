@@ -1,0 +1,27 @@
+﻿We designed our API but there are some of issues with this design
+our API receives or returns customer objects, this customer object is part of the domain model of our application,
+it's considered implementation detail which can change frequently as we implement new features in our application
+and these chnges can potentially break existing clients that are dependent on the customer object, for example if
+we rename or remove a property this can impact the clients that are dependent on that property so basically we need
+to make the contract of this API as stable as possible 
+so now solve this issue	we need a different model which we call a data transfer object or DTO
+this DTO is a plain data structure and is used to transfer data from the client to server or vu=ice versa
+
+              DTO 
+CLIENT -----------------> SERVER
+       <-----------------
+
+that's why we called it data transfer object
+by creating Dto's we reduce the chances of our API breaking as we refactoring our domain model and we should remember that
+changing these DTO's can be costly so when we need to change them we shuold plan a proper strategy
+-----------
+
+second issue is by returning a domain object here we are opening up security holes in our application,
+a hacker can easily pass additional data into JSON and they will be mapped to our domain object but if one of this properties
+should not be updated, hacker can easily bypass this but if you a data transfer object we can simply exclude the properties 
+that can be updated 
+
+-----------
+In solution exp add a new folder, named it to DTOs and add new class
+CustomerDto.cs
+from customer class copy all the properties and add them in CustomerDto

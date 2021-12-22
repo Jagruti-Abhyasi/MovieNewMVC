@@ -1,0 +1,22 @@
+﻿While updating data on form if you don't want to set all property manually, you can use auto mapper
+
+For example in our customer controller in Save action method, we need to set this
+CustomerInDb.Name = customer.Name for all property
+
+Auto Mapper is a convention base Mapping tool, so it looks at the property names of the source and target types
+and maps them by convention, so instead of this four line your code may look like this
+
+Mapper.Map(customer, customerInDb);
+
+so it looks at the properties in customer object and then looks for properties with the same name in the target object
+and maps them accordingly.
+
+now to address the security issue, if you want to limit the properties of the customer that can be updated,
+instead of accepting a complete customer object here you can create a different	class and call it
+something like updateCustomerDto which stand for Data Transfer Object 
+so it's a simple data structure which is a small representation of a customer with only properties that
+can be updated and this way you can safely use a tool like	auto mapper to update all properties in that Dto to 
+your domain object.
+
+Note : Keep all your hidden field at the last and just before Button on html form.
+

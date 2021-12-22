@@ -1,0 +1,23 @@
+﻿1) we used Data Annotation on properties on our entities like [Required] [StringLenght(255)]
+ to overwrite Entity Framework Convention
+
+ 2) EF uses data annotation to validate action parameters, so in CustomersController, in the save action here 
+  we have customer as parameter 
+
+  When asp.net MVC populate this customer object using request data it checks to see if this object	is valid
+  based on the data anotations applied on various properties of this customer class,
+ we can use ModelState property to get access to validation data.
+
+ use this property to change the flow of the programme and if the model state is not valid then return the same view.
+
+ 3) add validation messages to our form (on view)
+
+ This all are server side validation
+ ---------------------------------------------------------
+
+ Client side validation
+
+ benifits : 
+ 1) User gets Immediate feedback, because they don't need to wait for round trip to the server
+
+ 2)No waste of server side resources

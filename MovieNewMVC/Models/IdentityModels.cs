@@ -24,8 +24,11 @@ namespace MovieNewMVC.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-
-        public static ApplicationDbContext Create()
+        public DbSet<Movie> Movies { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Membership> Memberships { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public static ApplicationDbContext Create() 
         {
             return new ApplicationDbContext();
         }

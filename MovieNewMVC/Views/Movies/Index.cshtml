@@ -1,0 +1,69 @@
+﻿@model IEnumerable<MovieNewMVC.Models.Movie>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Movies List</h2>
+<button>
+    @Html.ActionLink("Add Movie","New","Movies")
+</button>
+<table id="movies" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Movie</th>
+            <th>Genre</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model)
+        {
+        <tr>
+            @*<td>@Html.ActionLink(movie.Name,"Details","Movies",new { id=movie.Id},null)</td>*@
+            <td>@Html.ActionLink(movie.Name, "Edit", "Movies", new { id = movie.Id }, null)</td>
+            <td>@movie.Genre.Name</td>
+            <td>
+                <button data-movies-id="@movie.Id" class="btn-link js-delete">Delete</button>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#movies").dataTable();
+
+            $("#movies .js-delete").on("click", function () {
+                var button = $(this);
+                bootbox.confirm("Are you sure you want to delete movie ?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/movies/" + button.attr("data-movies-id"),
+                            method: "DELETE",
+                            success: function () {
+                                button.parents("tr").remove();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+        //$(document).ready(function () {
+        //    $("#movies .js-delete").on("click", function () {
+        //        var button = $(this);
+        //        if (confirm("Are you sure you want to delete movie ?")) {
+        //            $.ajax({
+        //                url: "/api/movies/" + button.attr("data-movies-id"),
+        //                method: "DELETE",
+        //                success: function () {
+        //                    button.parents("tr").remove();
+        //                }
+        //            })
+        //        }
+        //    });
+        //});
+    </script>    
+}

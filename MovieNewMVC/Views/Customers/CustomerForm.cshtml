@@ -1,0 +1,51 @@
+﻿@*@model MovieNewMVC.Models.Customer*@
+@model MovieNewMVC.ViewModel.CustomerFormViewModel
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Customer</h2>
+@*First it was Create - now change to Save*@
+@using (Html.BeginForm("Save", "Customers"))
+{
+    @*@Html.ValidationSummary()*@
+    //if we don't want to display whole list of error msgs ,then pass below argument
+    @Html.ValidationSummary(true, "Please fix below error ")
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.Name)
+        @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Customer.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.MembershipId)
+        @* second parameter of this method is supply list of item for dropdown list*@
+        @* SelectList is used to intialize dropdown list,first args is list of items so Model.Membership*@
+        @* second arg is name pf property that holds the value of it so here is Id, third propery is hold the text for each item*@
+        @Html.DropDownListFor(m => m.Customer.MembershipId, new SelectList(Model.Memberships, "Id", "Name"), "Select Membership Types", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Customer.MembershipId)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.Birthdate)
+        @*to format date , pass second argument as format in curly bracket and provide format for date *@
+        @Html.TextBoxFor(m => m.Customer.Birthdate, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Customer.Birthdate)
+    </div>
+
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.Customer.IsSunscribedToNewsletter) Subscribe to Newsletter ?
+        </label>
+    </div>
+
+    @Html.HiddenFor(m => m.Customer.Id)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">
+        Save
+    </button>
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

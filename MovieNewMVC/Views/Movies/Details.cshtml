@@ -1,0 +1,17 @@
+﻿@model MovieNewMVC.Models.Movie
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<table>
+    <tr>
+        <td>Genre : @Model.Genre.Name</td>
+    </tr>
+    <tr>
+        Release date : <td>@Model.ReleaseDate</td>
+    </tr>
+</table>
+

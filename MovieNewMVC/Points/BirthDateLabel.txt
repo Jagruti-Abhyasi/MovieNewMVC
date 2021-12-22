@@ -1,0 +1,26 @@
+﻿<div class="form-group">
+    @Html.LabelFor(m => m.Customer.Birthdate)
+    @Html.TextBoxFor(m => m.Customer.Birthdate, "{0:d MMM yyyy}", new { @class = "form-control" })
+</div>
+
+From above code label display for Birthdate is Birthdate, what if we want it as Date of birth ?
+
+Name of label is same as property name of the correspondig class.
+
+Here we have two options, first go into the customer class and apply data annotation to birthdate as
+[Display(Name="Date of Birth")]
+
+Problem with this code is everytime we change our label, we have to re-compile our code
+
+Second option is go to our view and instead of using LabelFor use manually label like
+<label>Date of Birth</label>
+
+But when we have LabelFor attribute and we click on label Birthdate , focus set on text box of birthdate. And when we added
+label manually we can not set focus while clicking on label.
+
+If we want to focus then we need to manually add for attribute like this
+for="Birthdate", here is another problem when we change Birthdate property in our c# code this for="Birthdate" attribute
+is nt going to change itself.
+
+so it's up to you which one is used but for now we r going to use LabelFor helper method.
+

@@ -1,0 +1,4 @@
+﻿refer MVC_Chap_6.docx 
+$("#customers .js-delete").on("click", function () {}
+
+if we have 20 customers on 

@@ -1,0 +1,60 @@
+﻿Chap -5 - How to create Rest full services using asp.net mvc
+----------------
+1) What is Web API ?
+This is a MVC Architecture 
+
+              Request
+CLIENT ------------------------->  SERVER
+
+So when request arrives at our application and we see framework hands off that request to an action in a controller,
+thia action most of the time returns a view, which is then parsed by razor view engine and then eventually HTML markup
+returned to the client, So in this approach HTML markup is generated on the server and then returned to the client
+there is an alternative way to generate HTML markup.
+
+We can generate it on the client so instead of our actions returning markup they can return row data
+What is the benefit of this approach,
+1) Returning a row data to the client requires less of server resources by delegating the task of generating HTML markup 
+to the client we can free up server resources and potentially improve this scalability of our application because each client
+will responsible for generating their own views.
+(Less server resources (improve scalability))
+
+2) Raw data often requires less bandwidth than HTML markup so that data potentially arrives faster at the client and
+this can improve the perceived performance of the application
+(Less bandwidth (improve performance))
+
+3) we can build a broad range of clients like mobile and tablet apps, these apps simply call our endpoints, get the data 
+and generate the view locally, we call these endpoints data services or Web API's because they just return data not markup
+now these web Api's are not just for building mobile and tablet apps, other web sites can consume our web api's and 
+build new functionality
+for example many popular wensites like you tube, Facebook and Twitter expose public data services which we can consume in 
+our web applications, we can merge their data with the data in our application and provide new experiences to the user
+
+-------------------
+the framework we use to build these data services is called Asp.Net Web API, this framework was developed after asp.net MVC but
+it follows the same architectural principles so it has routing, controllers, actions, action results and so on
+
+in the next version of Asp.net MVC called a Asp.Net core 1.0, Microsoft has merged these two frameworks into a single unified 
+framework 
+----------------------
+Web Api example
+instead of generating HTML markup for the list of Customers, we can expose a Web API to return the list of customers and 
+then we use jQuery plugin called data table to generate this table on the client ,
+this plugin gives us pagination, searching and sorting out of the box, we don't have to write any additional code for that
+
+to get the list of customers we should send an HTTP GET request to this address
+GET    /api/customers
+
+to get a single customer will send an HTTP GET request and add the ID of the customer in the URL 
+GET   /api/customers/1
+
+to add a customer will send an HTTP POST request to this endpoint and Add the customer data in the request body
+POST  /api/customers
+
+to update a customer will send an HTTP PUT request to this URL, so the ID of the customer is in the URL and
+the actual data or properties to update will be in the request body
+PUT  /api/customers/1
+
+to delete a customer will send an HTTP DELETE request to this endpoint
+DELETE /api/customers/1
+
+

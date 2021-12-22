@@ -1,0 +1,13 @@
+﻿In ASP.NET MVC, ViewModel is a class that contains the fields which are represented in the strongly-typed view. It is used to pass data from controller to strongly-typed view.
+
+Key Points about ViewModel
+
+1) ViewModel contain fields that are represented in the view (for LabelFor,EditorFor,DisplayFor helpers)
+
+2) ViewModel can have specific validation rules using data annotations or IDataErrorInfo.
+
+3) ViewModel can have multiple entities or objects from different data models or data source.
+
+In our example, I created CustomerFormViewModel.cs class, because I need all membership type and customer detail 
+for display on view. Membership and Customer are two different domain class.
+

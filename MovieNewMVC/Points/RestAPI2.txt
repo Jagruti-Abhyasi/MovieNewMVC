@@ -1,0 +1,9 @@
+﻿- In Controller folder create a new folder and name it (Api)
+- Add new controller in this folder but this time we select 
+  We API 2 controller - Empty
+- first time when you add this API controller you get this readme.txt file that guide you how to configure Web API
+- in Global.asax.cs file, there is Application_Start() method
+- Add this line in the begining of application_start() method
+	GlobalConfiguration.Configure(WebApiConfig.Register);
+- import a namespace
+- using System.Web.Http;
